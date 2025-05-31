@@ -1,9 +1,10 @@
 import { defineConfig } from "cypress";
+import { setupNodeEvents } from "@plugins/setupNodeEvents";
 
 export default defineConfig({
   e2e: {
-    setupNodeEvents(on, config) {
-      // implement node event listeners here
-    },
+    baseUrl: "https://devcobalt.restaurant365.com",
+    specPattern: "**/*.feature",
+    setupNodeEvents,
   },
 });
