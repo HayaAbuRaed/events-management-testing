@@ -1,0 +1,28 @@
+{
+  "name": "events-management-testing",
+  "version": "1.0.0",
+  "description": "Writting smoke tests for events management section of R365 React app  ",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/HayaAbuRaed/events-management-testing.git"
+  },
+  "keywords": [
+    "Cypress",
+    "Cucumber",
+    "BDD"
+  ],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/HayaAbuRaed/events-management-testing/issues"
+  },
+  "homepage": "https://github.com/HayaAbuRaed/events-management-testing#readme",
+  "devDependencies": {
+    "cypress": "^14.4.0",
+    "typescript": "^5.8.3"
+  }
+}
