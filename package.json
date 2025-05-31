@@ -1,7 +1,7 @@
 {
   "name": "events-management-testing",
   "version": "1.0.0",
-  "description": "Writting smoke tests for events management section of R365 React app  ",
+  "description": "Writing smoke tests for events management section of R365 React app using Cypress and Cucumber",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -22,7 +22,17 @@
   },
   "homepage": "https://github.com/HayaAbuRaed/events-management-testing#readme",
   "devDependencies": {
+    "@badeball/cypress-cucumber-preprocessor": "^22.0.1",
+    "@bahmutov/cypress-esbuild-preprocessor": "^2.2.5",
     "cypress": "^14.4.0",
     "typescript": "^5.8.3"
+  },
+  "cypress": {
+    "testFiles": "**/*.feature",
+    "baseUrl": "http://localhost:3000"
+  },
+  "cypress-cucumber-preprocessor": {
+    "nonGlobalStepDefinitions": true,
+    "stepDefinitions": "cypress/support/step_definitions"
   }
 }

@@ -1,14 +1,18 @@
 {
   "compilerOptions": {
-    "module": "commonjs",
-    "moduleResolution": "node",
+    "module": "NodeNext",
+    "moduleResolution": "nodenext",
     "preserveValueImports": false,
     "target": "es5",
     "lib": ["es5", "dom"],
     "sourceMap": true,
     "types": ["cypress", "node"],
     "noImplicitAny": true,
-    "removeComments": true
+    "removeComments": true,
+    "baseUrl": ".",
+    "paths": {
+      "@plugins/*": ["cypress/plugins/*"]
+    }
   },
   "include": ["**/*.ts"]
 }
