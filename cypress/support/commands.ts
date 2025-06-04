@@ -7,6 +7,7 @@ declare global {
   namespace Cypress {
     interface Chainable {
       login(credentials?: Credentials): Chainable<void>;
+      getByTestId(testId: string): Chainable<JQuery<HTMLElement>>;
     }
   }
 }
@@ -19,4 +20,8 @@ Cypress.Commands.add("login", (credentials?: Credentials) => {
   LoginPageActions.fillUsername(username);
   LoginPageActions.fillPassword(password);
   LoginPageActions.clickLoginButton();
+});
+
+Cypress.Commands.add("getByTestId", (testId: string) => {
+  return cy.get(`[data-testid="${testId}"]`);
 });

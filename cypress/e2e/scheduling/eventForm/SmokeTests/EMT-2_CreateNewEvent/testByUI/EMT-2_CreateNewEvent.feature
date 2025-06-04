@@ -4,12 +4,12 @@ Feature: Create a New Event
 
     Scenario: Create a new event with valid details
         Given User is logged in
-        # When User navigates to the "Smart Operations" page
-        # And User clicks on the "Labor" tab
-        # And I click on the "Events" tab
-        # And I click on the "Create" button
-        # Then I choose "Create Event" from the dropdown
-        # And I should see the "Create Event" form
+        When User navigates to the "Smart Operations" page
+        And User navigates to the "Manager Tools" section
+        And User navigates to the "Events" panel
+        And User clicks on the "Create" button
+        And User chooses "Event" from the dropdown
+        And User should see the "Create Event" form
         # And I fill in the event details with valid information
         #     | Event Name       | Eid                              |
         #     | Date             | 2025-6-5                         |
