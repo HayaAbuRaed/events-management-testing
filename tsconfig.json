@@ -2,6 +2,8 @@
   "compilerOptions": {
     "module": "NodeNext",
     "moduleResolution": "nodenext",
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
     "preserveValueImports": false,
     "target": "es5",
     "lib": ["es5", "dom"],
