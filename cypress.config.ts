@@ -10,4 +10,6 @@ export default defineConfig({
     specPattern: "**/*.feature",
     setupNodeEvents,
   },
+  chromeWebSecurity: false,
+  experimentalModifyObstructiveThirdPartyCode: true,
 });
