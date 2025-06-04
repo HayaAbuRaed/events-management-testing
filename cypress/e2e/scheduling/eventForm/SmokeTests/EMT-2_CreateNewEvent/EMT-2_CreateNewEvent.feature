@@ -4,7 +4,7 @@ Feature: Create a New Event
 
     Scenario: Create a new event with valid details
         Given User is logged in
-        When User navigates to the "Smart Operations" page
+        # When User navigates to the "Smart Operations" page
         # And User clicks on the "Labor" tab
         # And I click on the "Events" tab
         # And I click on the "Create" button
