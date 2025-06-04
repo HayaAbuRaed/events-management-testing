@@ -39,11 +39,10 @@
     "typescript": "^5.8.3"
   },
   "cypress": {
-    "testFiles": "**/*.feature",
-    "baseUrl": "http://localhost:3000"
+    "testFiles": "**/*.feature"
   },
   "cypress-cucumber-preprocessor": {
     "nonGlobalStepDefinitions": true,
-    "stepDefinitions": "cypress/support/step_definitions"
+    "stepDefinitions": "cypress/e2e/**/*.ts"
   }
 }
