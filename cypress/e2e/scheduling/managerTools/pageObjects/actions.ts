@@ -14,7 +14,7 @@ class ManagerToolsActions {
   }
 
   static clickOnCreateEventListItem() {
-    cy.get(this.LOCATORS.createEventListItem).should("be.visible").contains("Event").click();
+    cy.getByTestId(this.LOCATORS.createEventListItem).should("be.visible").contains("Event").click();
   }
 }
 

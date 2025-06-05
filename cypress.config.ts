@@ -12,4 +12,8 @@ export default defineConfig({
   },
   chromeWebSecurity: false,
   experimentalModifyObstructiveThirdPartyCode: true,
+  env: {
+    serviceStack: "ServiceStack/",
+    netCore: "NetCore/",
+  },
 });

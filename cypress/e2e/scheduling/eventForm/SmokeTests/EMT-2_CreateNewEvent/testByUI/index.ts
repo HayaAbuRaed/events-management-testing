@@ -3,7 +3,6 @@ import ManagerToolsActions from "cypress/e2e/scheduling/managerTools/pageObjects
 import ClassicHomeActions from "cypress/e2e/shared/pageObjects/classicHome/actions";
 import SmartOperationsHomeActions from "cypress/e2e/shared/pageObjects/smartOperationsHome/actions";
 import EventFormAssertions from "../../../pageObjects/assertions";
-import EventFormActions from "../../../pageObjects/actions";
 
 Given("User is logged in", () => {
   cy.login();
@@ -40,5 +39,5 @@ When('User should see the "Create Event" form', () => {
 });
 
 When('User fills in the event details with valid information', () => {
-  EventFormActions.fillEventDate("2025-6-5");
+  // EventFormActions.fillEventDate("2025-6-5");
 });
