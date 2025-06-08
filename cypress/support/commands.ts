@@ -1,8 +1,11 @@
+import { LocationCleanupData, LocationSetupData } from "./types";
 /// <reference types="cypress" />
 
 import LoginPageActions from "cypress/e2e/login/pageObjects/actions";
 import { Credentials } from "./types";
 import { mainLogin } from "./utils";
+import { createLegalEntity, deleteLegalEntity } from "./apiHelpers/legalEntity";
+import { createLocation, deleteLocation } from "./apiHelpers/location";
 
 declare global {
   namespace Cypress {
@@ -10,6 +13,8 @@ declare global {
       login(credentials?: Credentials): Chainable<void>;
       loginWithApi(credentials?: Credentials): Chainable<void>;
       getByTestId(testId: string): Chainable<JQuery<HTMLElement>>;
+      setupTestLocation(): Chainable<LocationSetupData>;
+      cleanupTestLocation(cleanUpData: LocationCleanupData): Chainable<void>;
     }
   }
 }
@@ -42,3 +47,26 @@ Cypress.Commands.add("loginWithApi", (credentials?: Credentials) => {
     Cypress.env("DEFAULT_USER_ID", userId);
   });
 });
+
+Cypress.Commands.add("setupTestLocation", () => {
+  createLegalEntity({
+    dueFromAccount: Cypress.env("dueFromGLAccount"),
+    dueToAccount: Cypress.env("dueToGLAccount"),
+  }).then((legalEntityRes) => {
+    return createLocation(legalEntityRes.Id).then((locationRes) => {
+      return cy.wrap({
+        createdLegalEntityId: legalEntityRes.Id,
+        createdLocationId: locationRes.Id,
+        createdLocationName: locationRes.dm_name,
+      });
+    });
+  });
+});
+
+Cypress.Commands.add(
+  "cleanupTestLocation",
+  ({ locationId, legalEntityId }: LocationCleanupData) => {
+    locationId && deleteLocation(locationId);
+    legalEntityId && deleteLegalEntity(legalEntityId);
+  }
+);

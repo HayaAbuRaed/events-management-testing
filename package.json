@@ -44,5 +44,8 @@
   "cypress-cucumber-preprocessor": {
     "nonGlobalStepDefinitions": true,
     "stepDefinitions": "cypress/e2e/**/*.ts"
+  },
+  "dependencies": {
+    "date-fns": "^4.1.0"
   }
 }

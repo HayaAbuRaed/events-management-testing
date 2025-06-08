@@ -1,3 +1,4 @@
+import { format } from "date-fns";
 import { EMPTY_GUID } from "./constatnts";
 
 export const GetServiceStackUrlPrefix = (url: string) => {
@@ -53,4 +54,9 @@ export const mainLogin = (username: string, password: string): Cypress.Chainable
         localStorage.setItem("navigationPrivileges", JSON.stringify(res.body));
       });
     });
+};
+
+export const getPrefix = () => {
+  const prefix = `EMT-${format(new Date(), "MMddyy-HHmmss")}`;
+  return prefix;
 };
