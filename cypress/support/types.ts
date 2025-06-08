@@ -9,7 +9,8 @@ export interface LocationSetupData {
   createdLocationName: string;
 }
 
-export interface LocationCleanupData {
+export interface EventCleanupData {
+  eventId: string;
   legalEntityId: string;
   locationId: string;
 }

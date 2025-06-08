@@ -1,4 +1,4 @@
-import { LocationCleanupData, LocationSetupData } from "./types";
+import { EventCleanupData, LocationSetupData } from "./types";
 /// <reference types="cypress" />
 
 import LoginPageActions from "cypress/e2e/login/pageObjects/actions";
@@ -6,6 +6,7 @@ import { Credentials } from "./types";
 import { mainLogin } from "./utils";
 import { createLegalEntity, deleteLegalEntity } from "./apiHelpers/legalEntity";
 import { createLocation, deleteLocation } from "./apiHelpers/location";
+import { deleteEvent } from "./apiHelpers/event";
 
 declare global {
   namespace Cypress {
@@ -14,7 +15,7 @@ declare global {
       loginWithApi(credentials?: Credentials): Chainable<void>;
       getByTestId(testId: string): Chainable<JQuery<HTMLElement>>;
       setupTestLocation(): Chainable<LocationSetupData>;
-      cleanupTestLocation(cleanUpData: LocationCleanupData): Chainable<void>;
+      cleanupEventTestData(cleanUpData: EventCleanupData): Chainable;
     }
   }
 }
@@ -64,9 +65,23 @@ Cypress.Commands.add("setupTestLocation", () => {
 });
 
 Cypress.Commands.add(
-  "cleanupTestLocation",
-  ({ locationId, legalEntityId }: LocationCleanupData) => {
-    locationId && deleteLocation(locationId);
-    legalEntityId && deleteLegalEntity(legalEntityId);
+  "cleanupEventTestData",
+  ({ eventId, locationId, legalEntityId }: EventCleanupData) => {
+    return cy
+      .then(() => {
+        if (eventId) {
+          return deleteEvent(eventId);
+        }
+      })
+      .then(() => {
+        if (locationId) {
+          return deleteLocation(locationId);
+        }
+      })
+      .then(() => {
+        if (legalEntityId) {
+          return deleteLegalEntity(legalEntityId);
+        }
+      });
   }
 );
