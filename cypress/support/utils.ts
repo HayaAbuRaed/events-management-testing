@@ -1,5 +1,5 @@
 import { format } from "date-fns";
-import { EMPTY_GUID } from "./constatnts";
+import { EMPTY_GUID } from "./constants";
 
 export const GetServiceStackUrlPrefix = (url: string) => {
   return `${Cypress.env("serviceStack") || ""}${url}`;

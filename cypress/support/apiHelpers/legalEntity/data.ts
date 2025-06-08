@@ -1,6 +1,6 @@
-import { EMPTY_GUID } from "cypress/support/constatnts";
-import { LegalEntityRequest } from "./types";
+import { EMPTY_GUID } from "cypress/support/constants";
 import { getPrefix } from "cypress/support/utils";
+import { LegalEntityRequest } from "./types";
 
 export const getToBeCreatedLegalEntity = (
   dueFromAccount: string,

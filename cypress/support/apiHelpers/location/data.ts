@@ -1,8 +1,8 @@
-import { EMPTY_GUID } from "cypress/support/constatnts";
+import { EMPTY_GUID } from "cypress/support/constants";
+import { getPrefix } from "cypress/support/utils";
 import { format } from "date-fns";
 import { LOCATION_TYPES, OVERTIME_TRACKING_TYPE, POS_IMPORT_TYPES } from "./enums";
 import { LocationRequest } from "./types";
-import { getPrefix } from "cypress/support/utils";
 
 export const getToBeCreatedLocation = (legalEntityId: string): LocationRequest => {
   const prefix = getPrefix();
