@@ -1,4 +1,4 @@
-import { Given, Then, When } from "@badeball/cypress-cucumber-preprocessor";
+import { After, Before, Then, When } from "@badeball/cypress-cucumber-preprocessor";
 import ManagerToolsActions from "cypress/e2e/scheduling/managerTools/pageObjects/actions";
 import ManagerToolsAssertions from "cypress/e2e/scheduling/managerTools/pageObjects/assertions";
 import { EVENT_NAME } from "cypress/support/testData/events";
@@ -10,7 +10,7 @@ import { SetupData } from "./types";
 let setupData: SetupData;
 let createdEventId: string;
 
-before(() => {
+Before({ tags: "@EMT-2_CreateNewEvent" }, () => {
   cy.setupTestLocation().then((data: LocationSetupData) => {
     setupData = data;
   });
@@ -18,11 +18,6 @@ before(() => {
 
 beforeEach(() => {
   cy.intercept("POST", "/NetCore/Event/CreateEvent").as("createdEvent");
-});
-
-Given("The user navigates to events grid", () => {
-  cy.visit("/react/in-store-experience/scheduler-tools?activeSchedulerTools=Events");
-  cy.pause();
 });
 
 When("The user opens the event form", () => {
@@ -57,7 +52,7 @@ Then("The new event should be added to the events table", () => {
   EventFormAssertions.checkEventIsAddedToTable(EVENT_NAME);
 });
 
-after(() =>
+After({ tags: "@EMT-2_CreateNewEvent" }, () =>
   cy.cleanupEventTestData({
     eventId: createdEventId,
     locationId: setupData.createdLocationId,

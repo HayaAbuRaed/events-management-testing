@@ -14,3 +14,9 @@ export interface EventCleanupData {
   legalEntityId: string;
   locationId: string;
 }
+
+export interface EventSetupData {
+  eventId: string;
+  locationId: string;
+  legalEntityId: string;
+}
