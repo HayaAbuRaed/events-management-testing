@@ -1,37 +1,87 @@
+import { EventCleanupData, LocationSetupData } from "./types";
 /// <reference types="cypress" />
-// ***********************************************
-// This example commands.ts shows you how to
-// create various custom commands and overwrite
-// existing commands.
-//
-// For more comprehensive examples of custom
-// commands please read more here:
-// https://on.cypress.io/custom-commands
-// ***********************************************
-//
-//
-// -- This is a parent command --
-// Cypress.Commands.add('login', (email, password) => { ... })
-//
-//
-// -- This is a child command --
-// Cypress.Commands.add('drag', { prevSubject: 'element'}, (subject, options) => { ... })
-//
-//
-// -- This is a dual command --
-// Cypress.Commands.add('dismiss', { prevSubject: 'optional'}, (subject, options) => { ... })
-//
-//
-// -- This will overwrite an existing command --
-// Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
-//
-// declare global {
-//   namespace Cypress {
-//     interface Chainable {
-//       login(email: string, password: string): Chainable<void>
-//       drag(subject: string, options?: Partial<TypeOptions>): Chainable<Element>
-//       dismiss(subject: string, options?: Partial<TypeOptions>): Chainable<Element>
-//       visit(originalFn: CommandOriginalFn, url: string, options: Partial<VisitOptions>): Chainable<Element>
-//     }
-//   }
-// }
+
+import LoginPageActions from "cypress/e2e/login/pageObjects/actions";
+import { Credentials } from "./types";
+import { mainLogin } from "./utils";
+import { createLegalEntity, deleteLegalEntity } from "./apiHelpers/legalEntity";
+import { createLocation, deleteLocation } from "./apiHelpers/location";
+import { deleteEvent } from "./apiHelpers/event";
+
+declare global {
+  namespace Cypress {
+    interface Chainable {
+      login(credentials?: Credentials): Chainable<void>;
+      loginWithApi(credentials?: Credentials): Chainable<void>;
+      getByTestId(testId: string): Chainable<JQuery<HTMLElement>>;
+      setupTestLocation(): Chainable<LocationSetupData>;
+      cleanupEventTestData(cleanUpData: EventCleanupData): Chainable;
+    }
+  }
+}
+
+Cypress.Commands.add("login", (credentials?: Credentials) => {
+  const username = credentials?.username || Cypress.env("defaultUsername");
+  const password = credentials?.password || Cypress.env("defaultPassword");
+
+  LoginPageActions.visit();
+  LoginPageActions.fillUsername(username);
+  LoginPageActions.fillPassword(password);
+  LoginPageActions.clickLoginButton();
+});
+
+Cypress.Commands.add("getByTestId", (testId: string) => {
+  return cy.get(`[data-testid="${testId}"]`);
+});
+
+Cypress.Commands.add("loginWithApi", (credentials?: Credentials) => {
+  const username = credentials?.username || Cypress.env("defaultUsername");
+  const password = credentials?.password || Cypress.env("defaultPassword");
+
+  Cypress.log({
+    name: "login with API",
+    message: `Logging in with username: ${username}`,
+  });
+
+  mainLogin(username, password).then(() => {
+    const { userId } = JSON.parse(localStorage.getItem("loggedInUserDetails") || "");
+    Cypress.env("DEFAULT_USER_ID", userId);
+  });
+});
+
+Cypress.Commands.add("setupTestLocation", () => {
+  createLegalEntity({
+    dueFromAccount: Cypress.env("dueFromGLAccount"),
+    dueToAccount: Cypress.env("dueToGLAccount"),
+  }).then((legalEntityRes) => {
+    return createLocation(legalEntityRes.Id).then((locationRes) => {
+      return cy.wrap({
+        createdLegalEntityId: legalEntityRes.Id,
+        createdLocationId: locationRes.Id,
+        createdLocationName: locationRes.dm_name,
+      });
+    });
+  });
+});
+
+Cypress.Commands.add(
+  "cleanupEventTestData",
+  ({ eventId, locationId, legalEntityId }: EventCleanupData) => {
+    return cy
+      .then(() => {
+        if (eventId) {
+          return deleteEvent(eventId);
+        }
+      })
+      .then(() => {
+        if (locationId) {
+          return deleteLocation(locationId);
+        }
+      })
+      .then(() => {
+        if (legalEntityId) {
+          return deleteLegalEntity(legalEntityId);
+        }
+      });
+  }
+);
