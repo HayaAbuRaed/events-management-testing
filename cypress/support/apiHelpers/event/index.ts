@@ -18,7 +18,7 @@ export const deleteEvent = (eventId: string) => {
 
 export const createEvent = (location: Location) => {
   const eventPayload = getToBeCreatedEvent(location);
-  cy.log("Event Payload:", JSON.stringify(eventPayload));
+
   return cy
     .request({
       method: "POST",

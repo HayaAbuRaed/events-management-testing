@@ -1,25 +1,19 @@
-import { Given, Then, When } from "@badeball/cypress-cucumber-preprocessor";
-import { createEvent, deleteEvent } from "cypress/support/apiHelpers/event";
-import EventFormActions from "../../pageObjects/actions";
-import EventFormAssertions from "../../pageObjects/assertions";
+import { After, Before, Then, When } from "@badeball/cypress-cucumber-preprocessor";
 import { deleteLegalEntity } from "cypress/support/apiHelpers/legalEntity";
 import { deleteLocation } from "cypress/support/apiHelpers/location";
+import EventFormActions from "../../pageObjects/actions";
+import EventFormAssertions from "../../pageObjects/assertions";
 
 let eventId: string;
 let locationId: string;
 let legalEntityId: string;
 
-before(() => {
+Before({ tags: "@EMT-3_DeleteExistingEvent" }, () => {
   cy.setupTestEvent().then((data) => {
     eventId = data.eventId;
     locationId = data.locationId;
     legalEntityId = data.legalEntityId;
   });
-});
-
-Given("The user navigates to events tab", () => {
-  cy.visit("/react/in-store-experience/scheduler-tools?activeSchedulerTools=Events");
-  cy.pause();
 });
 
 When("The user selects an existing event", () => {
@@ -43,7 +37,7 @@ Then("The event should no longer be present in the events table", () => {
   EventFormAssertions.checkEventIsNotInTable(eventId);
 });
 
-after(() => {
+After({ tags: "@EMT-3_DeleteExistingEvent" }, () => {
   locationId &&
     deleteLocation(locationId).then(() => {
       legalEntityId && deleteLegalEntity(legalEntityId);
