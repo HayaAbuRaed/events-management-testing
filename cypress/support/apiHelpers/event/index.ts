@@ -1,3 +1,4 @@
+import { Location } from "./types";
 import { GetNetCoreUrlPrefix } from "cypress/support/utils";
 import { getToBeCreatedEvent } from "./data";
 
@@ -15,9 +16,9 @@ export const deleteEvent = (eventId: string) => {
     });
 };
 
-export const createEvent = () => {
-  const eventPayload = getToBeCreatedEvent();
-  cy.log("Event Payload:", JSON.stringify(eventPayload)); 
+export const createEvent = (location: Location) => {
+  const eventPayload = getToBeCreatedEvent(location);
+  cy.log("Event Payload:", JSON.stringify(eventPayload));
   return cy
     .request({
       method: "POST",

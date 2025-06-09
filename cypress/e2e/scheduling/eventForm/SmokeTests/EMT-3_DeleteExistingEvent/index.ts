@@ -2,12 +2,18 @@ import { Given, Then, When } from "@badeball/cypress-cucumber-preprocessor";
 import { createEvent, deleteEvent } from "cypress/support/apiHelpers/event";
 import EventFormActions from "../../pageObjects/actions";
 import EventFormAssertions from "../../pageObjects/assertions";
+import { deleteLegalEntity } from "cypress/support/apiHelpers/legalEntity";
+import { deleteLocation } from "cypress/support/apiHelpers/location";
 
 let eventId: string;
+let locationId: string;
+let legalEntityId: string;
 
 before(() => {
-  createEvent().then((event) => {
-    eventId = event.id;
+  cy.setupTestEvent().then((data) => {
+    eventId = data.eventId;
+    locationId = data.locationId;
+    legalEntityId = data.legalEntityId;
   });
 });
 
@@ -37,6 +43,9 @@ Then("The event should no longer be present in the events table", () => {
   EventFormAssertions.checkEventIsNotInTable(eventId);
 });
 
-// after(() => {
-//   deleteEvent(eventId);
-// });
+after(() => {
+  locationId &&
+    deleteLocation(locationId).then(() => {
+      legalEntityId && deleteLegalEntity(legalEntityId);
+    });
+});

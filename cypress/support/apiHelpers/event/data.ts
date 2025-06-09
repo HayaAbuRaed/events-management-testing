@@ -3,8 +3,9 @@ import { CreateEventRequestBody } from "./types";
 import { add } from "date-fns";
 import { EMPTY_GUID } from "cypress/support/constants";
 import { getPrefix } from "cypress/support/utils";
+import { Location } from "./types";
 
-export const getToBeCreatedEvent = (): CreateEventRequestBody => {
+export const getToBeCreatedEvent = (location: Location): CreateEventRequestBody => {
   const currentDateTime = new Date();
   const startDateTime = format(currentDateTime, "yyyy-MM-dd'T'HH:mm:ssXXX");
   const endDateTime = format(add(currentDateTime, { hours: 5 }), "yyyy-MM-dd'T'HH:mm:ssXXX");
@@ -17,7 +18,7 @@ export const getToBeCreatedEvent = (): CreateEventRequestBody => {
       endTime,
       eventType: 2,
       id: EMPTY_GUID,
-      location: { id: "4fdbe783-6ed3-4ecf-a7f5-7e01619dedc0", name: "Comida Test" },
+      location: { id: location.id, name: location.name },
       name: `${getPrefix()} Event${Math.floor(Math.random() * 1000)}`,
       startDate: startDateTime,
       startDateTime,
