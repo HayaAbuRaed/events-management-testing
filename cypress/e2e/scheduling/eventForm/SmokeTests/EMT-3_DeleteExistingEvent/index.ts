@@ -1,5 +1,5 @@
 import { After, Before, Then, When } from "@badeball/cypress-cucumber-preprocessor";
-import { assertSnackbarVisible } from "cypress/e2e/common/commonAssertions";
+import CommonAssertions from "cypress/e2e/common/commonAssertions";
 import { deleteLegalEntity } from "cypress/support/apiHelpers/legalEntity";
 import { deleteLocation } from "cypress/support/apiHelpers/location";
 import {
@@ -18,12 +18,12 @@ When('The user clicks on the "Delete" button', () => {
 });
 
 When("The user confirms the deletion", () => {
-  EventFormAssertions.checkIsDeletionConfirmationDialogVisible();
+  CommonAssertions.assertDialogVisible("Are you sure you wish to delete?");
   EventFormActions.clickConfirmDeleteButton();
 });
 
 Then('The user should see a snack bar with "Deleted successfully" success message', () => {
-  assertSnackbarVisible("Deleted successfully");
+  CommonAssertions.assertSnackbarVisible("Deleted successfully");
 });
 
 Then("The event should no longer be present in the events table", () => {

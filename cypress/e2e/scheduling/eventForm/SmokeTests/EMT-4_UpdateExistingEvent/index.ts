@@ -1,5 +1,5 @@
 import { After, Before, When } from "@badeball/cypress-cucumber-preprocessor";
-import { assertSnackbarVisible } from "cypress/e2e/common/commonAssertions";
+import CommonAssertions from "cypress/e2e/common/commonAssertions";
 import { cleanUpEventTest, setupEventTest } from "cypress/support/hooks/eventSetupHooks";
 import { EVENT_NAME } from "cypress/support/testData/events";
 import EventFormActions from "../../pageObjects/actions";
@@ -20,7 +20,7 @@ When('The user clicks on the "Save" button', () => {
 });
 
 When('The user should see a snack bar with "Updated successfully" success message', () => {
-  assertSnackbarVisible("Updated successfully");
+  CommonAssertions.assertSnackbarVisible("Updated successfully");
 });
 
 When("The updated event should be present in the events table with the new details", () => {

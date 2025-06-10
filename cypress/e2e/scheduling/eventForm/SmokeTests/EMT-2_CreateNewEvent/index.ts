@@ -1,7 +1,6 @@
 import { After, Before, Then, When } from "@badeball/cypress-cucumber-preprocessor";
-import { assertSnackbarVisible } from "cypress/e2e/common/commonAssertions";
+import CommonAssertions from "cypress/e2e/common/commonAssertions";
 import ManagerToolsActions from "cypress/e2e/scheduling/managerTools/pageObjects/actions";
-import ManagerToolsAssertions from "cypress/e2e/scheduling/managerTools/pageObjects/assertions";
 import { EVENT_NAME } from "cypress/support/testData/events";
 import { LocationSetupData } from "cypress/support/types";
 import EventFormActions from "../../pageObjects/actions";
@@ -19,7 +18,7 @@ Before({ tags: "@EMT-2_CreateNewEvent" }, () => {
 
 When("The user opens the event form", () => {
   ManagerToolsActions.clickOnCreateButton().clickOnCreateEventListItem();
-  ManagerToolsAssertions.checkEventFormModalIsOpen();
+  CommonAssertions.assertDialogVisible("Event Form");
 });
 
 When("The user fills the required fields:", () => {
@@ -33,7 +32,7 @@ When('The user clicks on the "Create" button', () => {
 });
 
 Then('The user should see a snack bar with "Created successfully" success message', () => {
-  assertSnackbarVisible("Created successfully");
+  CommonAssertions.assertSnackbarVisible("Created successfully");
 });
 
 Then("The new event should be added to the events table", () => {

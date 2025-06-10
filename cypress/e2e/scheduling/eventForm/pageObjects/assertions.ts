@@ -18,13 +18,6 @@ class EventFormAssertions {
       .contains(eventName)
       .should(shouldExist ? "exist" : "not.exist");
   }
-
-  static checkIsDeletionConfirmationDialogVisible() {
-    cy.getByRole(this.LOCATORS.dialog)
-      .should("be.visible")
-      .contains("Are you sure you wish to delete?")
-      .should("exist");
-  }
 }
 
 export default EventFormAssertions;

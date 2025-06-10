@@ -1,7 +1,3 @@
-class ManagerToolsAssertions {
-  static checkEventFormModalIsOpen() {
-    cy.getByRole("dialog").should("be.visible");
-  }
-}
+class ManagerToolsAssertions {}
 
 export default ManagerToolsAssertions;
