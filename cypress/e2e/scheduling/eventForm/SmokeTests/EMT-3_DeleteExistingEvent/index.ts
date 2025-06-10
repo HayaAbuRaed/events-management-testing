@@ -26,7 +26,7 @@ Then('The user should see a snack bar with "Deleted successfully" success messag
 });
 
 Then("The event should no longer be present in the events table", () => {
-  EventFormAssertions.checkEventIsNotInTable(eventId);
+  EventFormAssertions.assertEventPresenceInTable({ eventName: eventId, shouldExist: false });
 });
 
 After({ tags: "@EMT-3_DeleteExistingEvent" }, () => {

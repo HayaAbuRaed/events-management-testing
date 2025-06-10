@@ -47,7 +47,7 @@ Then("The new event should be added to the events table", () => {
     name: "Check Event Interception",
     message: `Checking if event with ID "${createdEventId}" is intercepted`,
   });
-  EventFormAssertions.checkEventIsAddedToTable(EVENT_NAME);
+  EventFormAssertions.assertEventPresenceInTable({ eventName: EVENT_NAME });
 });
 
 After({ tags: "@EMT-2_CreateNewEvent" }, () =>

@@ -1,3 +1,5 @@
+import { EventPresenceOptions } from "./types";
+
 class EventFormAssertions {
   static LOCATORS = {
     createEventForm: "createEventForm",
@@ -17,9 +19,11 @@ class EventFormAssertions {
       .and("contain", "Created successfully");
   }
 
-  static checkEventIsAddedToTable(eventName: string) {
+  static assertEventPresenceInTable({ eventName, shouldExist = true }: EventPresenceOptions) {
     cy.getByRole(this.LOCATORS.eventsTable).should("be.visible");
-    cy.getByRole(this.LOCATORS.eventsTable).contains(eventName).should("exist");
+    cy.getByRole(this.LOCATORS.eventsTable)
+      .contains(eventName)
+      .should(shouldExist ? "exist" : "not.exist");
   }
 
   static checkIsDeletionConfirmationDialogVisible() {
@@ -35,10 +39,10 @@ class EventFormAssertions {
       .and("contain", "Deleted successfully");
   }
 
-  static checkEventIsNotInTable(eventId: string) {
-    cy.getByRole(this.LOCATORS.eventsTable).should("be.visible");
-    cy.getByTestId(this.LOCATORS.eventTableRow(eventId)).should("not.exist");
-  }
+  // static checkEventIsNotInTable(eventId: string) {
+  //   cy.getByRole(this.LOCATORS.eventsTable).should("be.visible");
+  //   cy.getByTestId(this.LOCATORS.eventTableRow(eventId)).should("not.exist");
+  // }
 
   static checkEventUpdatedSnackbar() {
     cy.getByRole(this.LOCATORS.eventCreatedSnackbar)

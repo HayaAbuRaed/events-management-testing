@@ -23,5 +23,5 @@ When('The user should see a snack bar with "Updated successfully" success messag
 });
 
 When("The updated event should be present in the events table with the new details", () => {
-  EventFormAssertions.checkEventIsAddedToTable(UPDATED_EVENT_NAME);
+  EventFormAssertions.assertEventPresenceInTable({ eventName: UPDATED_EVENT_NAME });
 });
