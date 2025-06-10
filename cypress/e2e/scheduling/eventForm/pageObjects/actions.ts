@@ -22,8 +22,19 @@ class EventFormActions {
     return this;
   }
 
-  static clickCreateButton() {
+  static clickCreateButton(onSuccess?: (response: any) => void) {
+    cy.intercept("POST", "/NetCore/Event/CreateEvent").as("createdEvent");
+
     cy.getByTestId(this.LOCATORS.createButton).click();
+
+    cy.wait("@createdEvent").then((interception) => {
+      expect(interception.response?.statusCode).to.eq(200);
+
+      if (onSuccess && interception.response) {
+        onSuccess(interception.response);
+      }
+    });
+
     return this;
   }
 

@@ -16,10 +16,6 @@ Before({ tags: "@EMT-2_CreateNewEvent" }, () => {
   });
 });
 
-beforeEach(() => {
-  cy.intercept("POST", "/NetCore/Event/CreateEvent").as("createdEvent");
-});
-
 When("The user opens the event form", () => {
   ManagerToolsActions.clickOnCreateButton().clickOnCreateEventListItem();
   ManagerToolsAssertions.checkEventFormModalIsOpen();
@@ -30,11 +26,8 @@ When("The user fills the required fields:", () => {
 });
 
 When('The user clicks on the "Create" button', () => {
-  EventFormActions.clickCreateButton();
-
-  cy.wait("@createdEvent").then((interception) => {
-    expect(interception.response?.statusCode).to.eq(200);
-    createdEventId = interception.response?.body?.event?.id;
+  EventFormActions.clickCreateButton((res) => {
+    createdEventId = res?.body?.event?.id;
   });
 });
 
@@ -43,10 +36,6 @@ Then('The user should see a snack bar with "Event created" success message', () 
 });
 
 Then("The new event should be added to the events table", () => {
-  Cypress.log({
-    name: "Check Event Interception",
-    message: `Checking if event with ID "${createdEventId}" is intercepted`,
-  });
   EventFormAssertions.assertEventPresenceInTable({ eventName: EVENT_NAME });
 });
 
