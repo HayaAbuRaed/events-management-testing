@@ -17,6 +17,7 @@ declare global {
       setupTestLocation(): Chainable<LocationSetupData>;
       cleanupEventTestData(cleanUpData: EventCleanupData): Chainable;
       setupTestEvent(): Chainable<EventSetupData>;
+      getByRole(role: string): Chainable<JQuery<HTMLElement>>;
     }
   }
 }
@@ -33,6 +34,10 @@ Cypress.Commands.add("login", (credentials?: Credentials) => {
 
 Cypress.Commands.add("getByTestId", (testId: string) => {
   return cy.get(`[data-testid="${testId}"]`);
+});
+
+Cypress.Commands.add("getByRole", (role: string) => {
+  return cy.get(`[role="${role}"]`);
 });
 
 Cypress.Commands.add("loginWithApi", (credentials?: Credentials) => {
