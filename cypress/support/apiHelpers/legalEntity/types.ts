@@ -1,16 +1,4 @@
-export interface Address {
-  Address1: string;
-  Address2: string | null;
-  AddressType: "Shipping";
-  City: string;
-  Country: string;
-  CountryName: string;
-  IsVerified: boolean;
-  Latitude: number | null;
-  Longitude: number | null;
-  PostalCode: string;
-  State: string;
-}
+import { Address } from "cypress/support/types";
 
 export interface LegalEntity {
   DefaultPayrollCheckAccount: string | null;

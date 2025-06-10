@@ -1,38 +1,32 @@
-import { EventCleanupData, EventSetupData, LocationSetupData } from "./types";
 /// <reference types="cypress" />
 
-import LoginPageActions from "cypress/e2e/login/pageObjects/actions";
-import { Credentials } from "./types";
-import { mainLogin } from "./utils";
+import { createEvent, deleteEvent } from "./apiHelpers/event";
 import { createLegalEntity, deleteLegalEntity } from "./apiHelpers/legalEntity";
 import { createLocation, deleteLocation } from "./apiHelpers/location";
-import { createEvent, deleteEvent } from "./apiHelpers/event";
-
+import { Credentials, EventCleanupData, EventSetupData, LocationSetupData, Option } from "./types";
+import { mainLogin } from "./utils";
 declare global {
   namespace Cypress {
     interface Chainable {
       login(credentials?: Credentials): Chainable<void>;
       loginWithApi(credentials?: Credentials): Chainable<void>;
-      getByTestId(testId: string): Chainable<JQuery<HTMLElement>>;
+      getByTestId(testId: string, options?: Partial<Option>): Chainable<JQuery<HTMLElement>>;
       setupTestLocation(): Chainable<LocationSetupData>;
       cleanupEventTestData(cleanUpData: EventCleanupData): Chainable;
       setupTestEvent(): Chainable<EventSetupData>;
+      getByRole(role: string, options?: Partial<Option>): Chainable<JQuery<HTMLElement>>;
+      waitPageLoading: () => Cypress.Chainable;
+      waitR365LoadingSpinnerArea: () => Cypress.Chainable;
     }
   }
 }
 
-Cypress.Commands.add("login", (credentials?: Credentials) => {
-  const username = credentials?.username || Cypress.env("defaultUsername");
-  const password = credentials?.password || Cypress.env("defaultPassword");
-
-  LoginPageActions.visit();
-  LoginPageActions.fillUsername(username);
-  LoginPageActions.fillPassword(password);
-  LoginPageActions.clickLoginButton();
+Cypress.Commands.add("getByTestId", (testId: string, options?: Partial<Option>) => {
+  return cy.get(`[data-testid="${testId}"]`, options);
 });
 
-Cypress.Commands.add("getByTestId", (testId: string) => {
-  return cy.get(`[data-testid="${testId}"]`);
+Cypress.Commands.add("getByRole", (role: string, options?: Partial<Option>) => {
+  return cy.get(`[role="${role}"]`, options);
 });
 
 Cypress.Commands.add("loginWithApi", (credentials?: Credentials) => {
@@ -104,6 +98,7 @@ Cypress.Commands.add("setupTestEvent", () => {
       }).then((event) => {
         return cy.wrap({
           eventId: event.id,
+          eventName: event.name,
           locationId: locationId,
           legalEntityId: legalEntityId,
         });

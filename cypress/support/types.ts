@@ -17,6 +17,23 @@ export interface EventCleanupData {
 
 export interface EventSetupData {
   eventId: string;
+  eventName: string;
   locationId: string;
   legalEntityId: string;
 }
+
+export interface Address {
+  Address1: string;
+  Address2: string | null;
+  AddressType: "Shipping";
+  City: string;
+  Country: string;
+  CountryName: string;
+  IsVerified: boolean;
+  Latitude: number | null;
+  Longitude: number | null;
+  PostalCode: string;
+  State: string;
+}
+
+export type Option = Cypress.Loggable & Cypress.Timeoutable & Cypress.Withinable & Cypress.Shadow;

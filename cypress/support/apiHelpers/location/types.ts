@@ -1,9 +1,10 @@
+import { Address } from "cypress/support/types";
 import {
-  LABOR_DATA_TRACKING_SYSTEM,
-  LOCATION_TYPES,
-  OVERTIME_TRACKING_TYPE,
-  POS_IMPORT_TYPES,
-  SOS_SYSTEM,
+  LaborDataTrackingSystem,
+  LocationType,
+  OvertimeTrackingType,
+  POSImportType,
+  SOSSystem,
 } from "./enums";
 
 export interface LocationRequest {
@@ -11,36 +12,8 @@ export interface LocationRequest {
   location: Location;
 }
 
-export type LocationType = (typeof LOCATION_TYPES)[keyof typeof LOCATION_TYPES];
-export type SOSSystemName = keyof typeof SOS_SYSTEM;
-export type POSImportType = (typeof POS_IMPORT_TYPES)[keyof typeof POS_IMPORT_TYPES];
-export type LaborDataTrackingSystem =
-  (typeof LABOR_DATA_TRACKING_SYSTEM)[keyof typeof LABOR_DATA_TRACKING_SYSTEM];
-export type OvertimeTrackingType =
-  (typeof OVERTIME_TRACKING_TYPE)[keyof typeof OVERTIME_TRACKING_TYPE];
-
-export interface Address {
-  Address1: string;
-  Address2: string | null;
-  AddressType: "Shipping";
-  City: string;
-  Country: string;
-  CountryName: string;
-  IsVerified: boolean;
-  Latitude: number;
-  Longitude: number;
-  PostalCode: string;
-  State: string;
-}
-
 export interface Location {
-  AdditionalInfoLabelList: {
-    AdditionalInfoNumber1Label: string;
-    AdditionalInfoNumber2Label: string;
-    AdditionalInfoNumber3Label: string;
-    AdditionalInfoText1Label: string;
-    AdditionalInfoText2Label: string;
-  };
+  AdditionalInfoLabelList: AdditionalInfoLabelList;
   AdditionalInfoNumber1: number | null;
   AdditionalInfoNumber2: number | null;
   AdditionalInfoNumber3: number | null;
@@ -80,18 +53,7 @@ export interface Location {
   IsNonComparableLocation: boolean;
   IsSpeedOfService: number;
   IsStandaloneScheduling: boolean;
-  LabelList: {
-    Category1: string;
-    Category2: string | null;
-    Category3: string | null;
-    Category4: string | null;
-    Category5: string | null;
-    Category6: string | null;
-    Category7: string | null;
-    Category8: string | null;
-    Category9: string | null;
-    Category10: string | null;
-  };
+  LabelList: LabelList;
   LaborDataTrackingSystem: LaborDataTrackingSystem;
   LocationAddresses: Address[];
   LocationCategory1: string | null;
@@ -132,7 +94,7 @@ export interface Location {
   R365LocationType: LocationType;
   SOSStartDate: string | null;
   SOSStartDateString: string | null;
-  SOSSystem: SOSSystemName;
+  SOSSystem: SOSSystem;
   SPLH: number;
   SPLHFriday: number;
   SPLHMonday: number;
@@ -266,15 +228,10 @@ export interface Location {
   filePublicLink: string | null;
   importTimeString: string | null;
   initialPOSSystem: string | null;
-//   legalEntity?: string | null;
   legalEntityReadOnly: boolean;
   locationId: string;
   locationNumber: string | null;
-  masterTax: {
-    reportingUnitNumber: string | null;
-    worksiteIDNumber: string | null;
-    worksiteDescription: string | null;
-  };
+  masterTax: MasterTax;
   newFileName: string | null;
   overShortAccountId: string | null;
   overShortAccountName: string | null;
@@ -289,4 +246,31 @@ export interface Location {
   thumbnailLink: string | null;
   tipsPayrollAccountId: string | null;
   tipsPayrollAccountName: string | null;
+}
+
+export interface AdditionalInfoLabelList {
+  AdditionalInfoNumber1Label: string | null;
+  AdditionalInfoNumber2Label: string | null;
+  AdditionalInfoNumber3Label: string | null;
+  AdditionalInfoText1Label: string | null;
+  AdditionalInfoText2Label: string | null;
+}
+
+export interface LabelList {
+  Category1: string;
+  Category2: string | null;
+  Category3: string | null;
+  Category4: string | null;
+  Category5: string | null;
+  Category6: string | null;
+  Category7: string | null;
+  Category8: string | null;
+  Category9: string | null;
+  Category10: string | null;
+}
+
+export interface MasterTax {
+  reportingUnitNumber: string | null;
+  worksiteIDNumber: string | null;
+  worksiteDescription: string | null;
 }

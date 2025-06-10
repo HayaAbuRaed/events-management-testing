@@ -1,7 +1,7 @@
 import { EMPTY_GUID } from "cypress/support/constants";
 import { getPrefix } from "cypress/support/utils";
 import { format } from "date-fns";
-import { LOCATION_TYPES, OVERTIME_TRACKING_TYPE, POS_IMPORT_TYPES } from "./enums";
+import { LocationType, OvertimeTrackingType, POSImportType } from "./enums";
 import { LocationRequest } from "./types";
 
 export const getToBeCreatedLocation = (legalEntityId: string): LocationRequest => {
@@ -119,7 +119,7 @@ export const getToBeCreatedLocation = (legalEntityId: string): LocationRequest =
       PaymentTypeRevenueCenter: 0,
       PayrollLocationID: null,
       PermanentCloseDate: null,
-      R365LocationType: LOCATION_TYPES.Restaurant,
+      R365LocationType: LocationType.Restaurant,
       SOSStartDate: null,
       SOSStartDateString: null,
       SOSSystem: null,
@@ -217,10 +217,10 @@ export const getToBeCreatedLocation = (legalEntityId: string): LocationRequest =
       dm_NetSalesGoalThursday: null,
       dm_NetSalesGoalTuesday: null,
       dm_NetSalesGoalWednesday: null,
-      dm_OvertimeTracking: OVERTIME_TRACKING_TYPE["Tracked in POS"],
+      dm_OvertimeTracking: OvertimeTrackingType["Tracked in POS"],
       dm_POSImportStart: null,
       dm_POSImportStartString: null,
-      dm_POSImportType: POS_IMPORT_TYPES.None,
+      dm_POSImportType: POSImportType.None,
       dm_POSSystem: null,
       dm_PayTipsWithPayroll: "false",
       dm_PayrollBenefitEstimate: 0,

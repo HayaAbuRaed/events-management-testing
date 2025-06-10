@@ -4,7 +4,9 @@ import EventFormActions from "../scheduling/eventForm/pageObjects/actions";
 
 Given("The user navigates to events grid", () => {
   cy.visit("/react/in-store-experience/scheduler-tools?activeSchedulerTools=Events");
-  cy.pause();
+
+  cy.contains("Events", { timeout: 50000 }).should("be.visible");
+  cy.getByRole("table", { timeout: 50000 }).should("be.visible");
 });
 
 When("The user clicks on an existing event record", () => {
