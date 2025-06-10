@@ -44,5 +44,8 @@ Then('The user should see a snack bar with "Created successfully" success messag
 });
 
 Then("The new event should be added to the events table", () => {
-  EventFormAssertions.assertEventPresenceInTable({ eventName: EVENT_NAME });
+  EventFormAssertions.assertEventPresenceInTable({
+    eventId: createdEventId,
+    eventName: EVENT_NAME,
+  });
 });

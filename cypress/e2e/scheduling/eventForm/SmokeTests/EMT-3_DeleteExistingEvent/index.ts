@@ -4,6 +4,7 @@ import { deleteLegalEntity } from "cypress/support/apiHelpers/legalEntity";
 import { deleteLocation } from "cypress/support/apiHelpers/location";
 import {
   eventId,
+  eventName,
   legalEntityId,
   locationId,
   setupEventTest,
@@ -34,5 +35,9 @@ Then('The user should see a snack bar with "Deleted successfully" success messag
 });
 
 Then("The event should no longer be present in the events table", () => {
-  EventFormAssertions.assertEventPresenceInTable({ eventName: eventId, shouldExist: false });
+  EventFormAssertions.assertEventPresenceInTable({
+    eventId: eventId,
+    eventName: eventName,
+    shouldExist: false,
+  });
 });

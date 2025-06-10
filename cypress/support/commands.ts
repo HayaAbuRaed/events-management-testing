@@ -109,6 +109,7 @@ Cypress.Commands.add("setupTestEvent", () => {
       }).then((event) => {
         return cy.wrap({
           eventId: event.id,
+          eventName: event.name,
           locationId: locationId,
           legalEntityId: legalEntityId,
         });

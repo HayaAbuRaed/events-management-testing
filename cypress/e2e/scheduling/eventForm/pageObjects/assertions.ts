@@ -4,7 +4,6 @@ class EventFormAssertions {
   static LOCATORS = {
     createEventForm: "createEventForm",
     eventsTable: "table",
-    dialog: "dialog",
     eventTableRow: (eventId: string) => `row${eventId}TableRow`,
   };
 
@@ -12,9 +11,9 @@ class EventFormAssertions {
     cy.getByTestId(this.LOCATORS.createEventForm).should("be.visible");
   }
 
-  static assertEventPresenceInTable({ eventName, shouldExist = true }: EventPresenceOptions) {
+  static assertEventPresenceInTable({ eventId, eventName, shouldExist = true }: EventPresenceOptions) {
     cy.getByRole(this.LOCATORS.eventsTable).should("be.visible");
-    cy.getByRole(this.LOCATORS.eventsTable)
+    cy.getByTestId(this.LOCATORS.eventTableRow(eventId))
       .contains(eventName)
       .should(shouldExist ? "exist" : "not.exist");
   }
