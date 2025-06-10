@@ -13,6 +13,6 @@ export const createLocation = (legalEntityId: string) => {
 export const deleteLocation = (locationId: string) => {
   return cy.request({
     method: "DELETE",
-    url: `${GetServiceStackUrlPrefix("Locations")}/${locationId}`,
+    url: `${GetServiceStackUrlPrefix("Locations/${locationId}")}`,
   });
 };

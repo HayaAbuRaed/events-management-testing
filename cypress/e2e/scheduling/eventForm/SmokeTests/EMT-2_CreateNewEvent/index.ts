@@ -16,6 +16,14 @@ Before({ tags: "@EMT-2_CreateNewEvent" }, () => {
   });
 });
 
+After({ tags: "@EMT-2_CreateNewEvent" }, () =>
+  cy.cleanupEventTestData({
+    eventId: createdEventId,
+    locationId: setupData.createdLocationId,
+    legalEntityId: setupData.createdLegalEntityId,
+  })
+);
+
 When("The user opens the event form", () => {
   ManagerToolsActions.clickOnCreateButton().clickOnCreateEventListItem();
   CommonAssertions.assertDialogVisible("Event Form");
@@ -38,11 +46,3 @@ Then('The user should see a snack bar with "Created successfully" success messag
 Then("The new event should be added to the events table", () => {
   EventFormAssertions.assertEventPresenceInTable({ eventName: EVENT_NAME });
 });
-
-After({ tags: "@EMT-2_CreateNewEvent" }, () =>
-  cy.cleanupEventTestData({
-    eventId: createdEventId,
-    locationId: setupData.createdLocationId,
-    legalEntityId: setupData.createdLegalEntityId,
-  })
-);

@@ -1,31 +1,30 @@
-export const POS_IMPORT_TYPES = {
-  None: 0,
-  "Sales and Labor": 1,
-  Sales: 2,
-  "Sales Summary": 3,
-  "Sales Summary And Labor": 4,
-} as const;
+export enum POSImportType {
+  None,
+  "Sales and Labor",
+  Sales,
+  "Sales Summary",
+  "Sales Summary And Labor",
+}
 
-export const LABOR_DATA_TRACKING_SYSTEM = {
-  "Managed In POS": 1,
-  "Managed In R365": 2,
-} as const;
+export enum LaborDataTrackingSystem {
+  "Managed In POS" = 1,
+  "Managed In R365" = 2,
+}
 
-export const OVERTIME_TRACKING_TYPE = {
-  "Tracked in POS": 0,
-  "Over 40": 1,
-  "Over 40 Over 8": 2,
-  "R365 OT Rules": 3,
-} as const;
+export enum OvertimeTrackingType {
+  "Tracked in POS",
+  "Over 40",
+  "Over 40 Over 8",
+  "R365 OT Rules",
+}
 
-export const LOCATION_TYPES = {
-  Restaurant: 1,
-  AccountingEntity: 2,
-  Commissary: 3,
-} as const;
+export enum LocationType {
+  Restaurant = 1,
+  AccountingEntity = 2,
+  Commissary = 3,
+}
 
-export const SOS_SYSTEM = {
-  // @ts-ignore
-  None: null,
-  "Drive Thru": 1,
-} as const;
+export enum SOSSystem {
+  None = null,
+  "Drive Thru" = 1,
+}

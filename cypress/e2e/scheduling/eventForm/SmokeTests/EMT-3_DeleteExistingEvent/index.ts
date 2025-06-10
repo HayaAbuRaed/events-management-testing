@@ -13,6 +13,13 @@ import EventFormAssertions from "../../pageObjects/assertions";
 
 Before({ tags: "@EMT-3_DeleteExistingEvent" }, setupEventTest);
 
+After({ tags: "@EMT-3_DeleteExistingEvent" }, () => {
+  locationId &&
+    deleteLocation(locationId).then(() => {
+      legalEntityId && deleteLegalEntity(legalEntityId);
+    });
+});
+
 When('The user clicks on the "Delete" button', () => {
   EventFormActions.clickDeleteButton();
 });
@@ -28,11 +35,4 @@ Then('The user should see a snack bar with "Deleted successfully" success messag
 
 Then("The event should no longer be present in the events table", () => {
   EventFormAssertions.assertEventPresenceInTable({ eventName: eventId, shouldExist: false });
-});
-
-After({ tags: "@EMT-3_DeleteExistingEvent" }, () => {
-  locationId &&
-    deleteLocation(locationId).then(() => {
-      legalEntityId && deleteLegalEntity(legalEntityId);
-    });
 });

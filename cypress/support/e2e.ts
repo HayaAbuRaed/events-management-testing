@@ -1,6 +1,7 @@
+import { Before } from "@badeball/cypress-cucumber-preprocessor";
 import "./commands";
 
-before(() => {
+Before(() => {
   cy.loginWithApi();
 });
 
