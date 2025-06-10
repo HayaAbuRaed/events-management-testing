@@ -11,7 +11,7 @@ class EventFormActions {
   };
 
   static fillEventName(eventName: string) {
-    cy.getByTestId(this.LOCATORS.eventNameInput).clear().type(eventName).blur();
+    cy.getByTestId(this.LOCATORS.eventNameInput).clear().type(eventName);
     return this;
   }
 

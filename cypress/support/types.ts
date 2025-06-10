@@ -35,3 +35,5 @@ export interface Address {
   PostalCode: string;
   State: string;
 }
+
+export type Option = Cypress.Loggable & Cypress.Timeoutable & Cypress.Withinable & Cypress.Shadow;

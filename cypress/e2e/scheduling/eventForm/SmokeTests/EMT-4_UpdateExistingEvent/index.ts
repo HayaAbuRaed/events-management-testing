@@ -1,6 +1,6 @@
 import { After, Before, When } from "@badeball/cypress-cucumber-preprocessor";
 import CommonAssertions from "cypress/e2e/common/commonAssertions";
-import { cleanUpEventTest, setupEventTest } from "cypress/support/hooks/eventSetupHooks";
+import { cleanUpEventTest, eventId, setupEventTest } from "cypress/support/hooks/eventSetupHooks";
 import { EVENT_NAME } from "cypress/support/testData/events";
 import EventFormActions from "../../pageObjects/actions";
 import EventFormAssertions from "../../pageObjects/assertions";
@@ -24,5 +24,8 @@ When('The user should see a snack bar with "Updated successfully" success messag
 });
 
 When("The updated event should be present in the events table with the new details", () => {
-  EventFormAssertions.assertEventPresenceInTable({ eventName: UPDATED_EVENT_NAME });
+  EventFormAssertions.assertEventPresenceInTable({
+    eventId: eventId,
+    eventName: UPDATED_EVENT_NAME,
+  });
 });
