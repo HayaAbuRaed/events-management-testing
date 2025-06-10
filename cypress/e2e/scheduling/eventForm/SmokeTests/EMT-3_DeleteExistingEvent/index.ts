@@ -12,10 +12,6 @@ import EventFormAssertions from "../../pageObjects/assertions";
 
 Before({ tags: "@EMT-3_DeleteExistingEvent" }, setupEventTest);
 
-When("The user selects an existing event", () => {
-  EventFormActions.clickEventRow(eventId);
-});
-
 When('The user clicks on the "Delete" button', () => {
   EventFormActions.clickDeleteButton();
 });
