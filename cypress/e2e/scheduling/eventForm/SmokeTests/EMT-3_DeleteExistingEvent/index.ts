@@ -1,4 +1,5 @@
 import { After, Before, Then, When } from "@badeball/cypress-cucumber-preprocessor";
+import { assertSnackbarVisible } from "cypress/e2e/common/commonAssertions";
 import { deleteLegalEntity } from "cypress/support/apiHelpers/legalEntity";
 import { deleteLocation } from "cypress/support/apiHelpers/location";
 import {
@@ -22,7 +23,7 @@ When("The user confirms the deletion", () => {
 });
 
 Then('The user should see a snack bar with "Deleted successfully" success message', () => {
-  EventFormAssertions.checkEventDeletedSnackbar();
+  assertSnackbarVisible("Deleted successfully");
 });
 
 Then("The event should no longer be present in the events table", () => {

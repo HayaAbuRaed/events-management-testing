@@ -9,5 +9,5 @@ Feature: EMT-2 Create a new event
             | Event Name | EMT-2 Event Example |
             | Location   | [location name]     |
         And The user clicks on the "Create" button
-        Then The user should see a snack bar with "Event created" success message
+        Then The user should see a snack bar with "Created successfully" success message
         And The new event should be added to the events table

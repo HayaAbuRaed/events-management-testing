@@ -1,4 +1,5 @@
 import { After, Before, Then, When } from "@badeball/cypress-cucumber-preprocessor";
+import { assertSnackbarVisible } from "cypress/e2e/common/commonAssertions";
 import ManagerToolsActions from "cypress/e2e/scheduling/managerTools/pageObjects/actions";
 import ManagerToolsAssertions from "cypress/e2e/scheduling/managerTools/pageObjects/assertions";
 import { EVENT_NAME } from "cypress/support/testData/events";
@@ -31,8 +32,8 @@ When('The user clicks on the "Create" button', () => {
   });
 });
 
-Then('The user should see a snack bar with "Event created" success message', () => {
-  EventFormAssertions.checkEventCreatedSnackbar();
+Then('The user should see a snack bar with "Created successfully" success message', () => {
+  assertSnackbarVisible("Created successfully");
 });
 
 Then("The new event should be added to the events table", () => {
