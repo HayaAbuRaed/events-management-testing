@@ -21,14 +21,12 @@ beforeEach(() => {
 });
 
 When("The user opens the event form", () => {
-  ManagerToolsActions.clickOnCreateButton();
-  ManagerToolsActions.clickOnCreateEventListItem();
+  ManagerToolsActions.clickOnCreateButton().clickOnCreateEventListItem();
   ManagerToolsAssertions.checkEventFormModalIsOpen();
 });
 
 When("The user fills the required fields:", () => {
-  EventFormActions.fillEventName(EVENT_NAME);
-  EventFormActions.selectEventLocation(setupData.createdLocationName);
+  EventFormActions.fillEventName(EVENT_NAME).selectEventLocation(setupData.createdLocationName);
 });
 
 When('The user clicks on the "Create" button', () => {
