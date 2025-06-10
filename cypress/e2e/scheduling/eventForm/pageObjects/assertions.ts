@@ -39,6 +39,12 @@ class EventFormAssertions {
     cy.get(this.LOCATORS.eventsTable).should("be.visible");
     cy.getByTestId(this.LOCATORS.eventTableRow(eventId)).should("not.exist");
   }
+
+  static checkEventUpdatedSnackbar() {
+    cy.get(this.LOCATORS.eventCreatedSnackbar)
+      .should("be.visible")
+      .and("contain", "Updated successfully");
+  }
 }
 
 export default EventFormAssertions;

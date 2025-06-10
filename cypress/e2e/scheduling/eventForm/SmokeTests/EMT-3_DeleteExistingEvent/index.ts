@@ -1,24 +1,16 @@
 import { After, Before, Then, When } from "@badeball/cypress-cucumber-preprocessor";
 import { deleteLegalEntity } from "cypress/support/apiHelpers/legalEntity";
 import { deleteLocation } from "cypress/support/apiHelpers/location";
+import {
+  eventId,
+  legalEntityId,
+  locationId,
+  setupEventTest,
+} from "cypress/support/hooks/eventSetupHooks";
 import EventFormActions from "../../pageObjects/actions";
 import EventFormAssertions from "../../pageObjects/assertions";
 
-let eventId: string;
-let locationId: string;
-let legalEntityId: string;
-
-Before({ tags: "@EMT-3_DeleteExistingEvent" }, () => {
-  cy.setupTestEvent().then((data) => {
-    eventId = data.eventId;
-    locationId = data.locationId;
-    legalEntityId = data.legalEntityId;
-  });
-});
-
-When("The user selects an existing event", () => {
-  EventFormActions.clickEventRow(eventId);
-});
+Before({ tags: "@EMT-3_DeleteExistingEvent" }, setupEventTest);
 
 When('The user clicks on the "Delete" button', () => {
   EventFormActions.clickDeleteButton();

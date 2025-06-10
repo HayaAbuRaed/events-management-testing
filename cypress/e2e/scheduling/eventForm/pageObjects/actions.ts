@@ -7,14 +7,15 @@ class EventFormActions {
     eventTableRow: (eventId: string) => `row${eventId}TableRow`,
     deleteIcon: "DeleteIcon",
     confirmDeleteButton: "deleteButton",
+    saveButton: "saveEvent",
   };
 
   static fillEventName(eventName: string) {
-    cy.getByTestId(this.LOCATORS.eventNameInput).type(eventName);
+    cy.getByTestId(this.LOCATORS.eventNameInput).clear().type(eventName);
   }
 
   static selectEventLocation(location: string) {
-    cy.getByTestId(this.LOCATORS.eventLocationSelector).should("be.visible").click();
+    cy.getByTestId(this.LOCATORS.eventLocationSelector).click();
     cy.getByTestId(this.LOCATORS.locationsSearchInput).type(location);
     cy.getByTestId(`option-${location}`).click();
   }
@@ -33,6 +34,10 @@ class EventFormActions {
 
   static clickConfirmDeleteButton() {
     cy.getByTestId(this.LOCATORS.confirmDeleteButton).click();
+  }
+
+  static clickSaveButton() {
+    cy.getByTestId(this.LOCATORS.saveButton).click();
   }
 }
 
