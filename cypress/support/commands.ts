@@ -50,6 +50,9 @@ Cypress.Commands.add("setupTestLocation", () => {
     dueToAccount: Cypress.env("dueToGLAccount"),
   }).then((legalEntityRes) => {
     return createLocation(legalEntityRes.Id).then((locationRes) => {
+      /**
+       * @comment do we need to wrap the return value?
+       */
       return cy.wrap({
         createdLegalEntityId: legalEntityRes.Id,
         createdLocationId: locationRes.Id,

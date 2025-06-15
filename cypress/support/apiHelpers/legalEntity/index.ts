@@ -8,6 +8,9 @@ export const createLegalEntity = (intercompany: Intercompany) => {
     intercompany.dueToAccount
   );
 
+  /**
+   * @comment returned response must be typed.
+   */
   return cy
     .request({
       method: "POST",
@@ -15,6 +18,9 @@ export const createLegalEntity = (intercompany: Intercompany) => {
       body: legalEntity,
     })
     .then((res) => {
+      /**
+       * @comment function must be a single responsibility. Avoid mixing data retrieval and assertions.
+       */
       expect(res.status).to.eq(200);
       return res.body.model;
     });

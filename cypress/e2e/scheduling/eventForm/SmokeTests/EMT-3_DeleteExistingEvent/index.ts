@@ -15,6 +15,9 @@ import EventFormAssertions from "../../pageObjects/assertions";
 Before({ tags: "@EMT-3_DeleteExistingEvent" }, setupEventTest);
 
 After({ tags: "@EMT-3_DeleteExistingEvent" }, () => {
+  /**
+   * @comment Why are you not using your `cleanUpEventTest` function here?
+   */
   locationId &&
     deleteLocation(locationId).then(() => {
       legalEntityId && deleteLegalEntity(legalEntityId);

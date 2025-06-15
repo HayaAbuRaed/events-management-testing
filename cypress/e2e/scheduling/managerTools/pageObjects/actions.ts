@@ -1,4 +1,8 @@
 class ManagerToolsActions {
+  /**
+   * @comment One of the points of using the class structure is to encapsulate details that are not relevant to the outside.
+   * Consider marking this as private or moving it outside the class definition.
+   */
   static LOCATORS = {
     eventsTab: "eventsTab",
     createButton: "noxCreateButton",

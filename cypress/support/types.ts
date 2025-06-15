@@ -25,6 +25,9 @@ export interface EventSetupData {
 export interface Address {
   Address1: string;
   Address2: string | null;
+  /**
+   * @comment Should be a detailed enum or a string literal type.
+   */
   AddressType: "Shipping";
   City: string;
   Country: string;
